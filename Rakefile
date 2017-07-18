@@ -5,7 +5,9 @@ task :collect do
     ress = dns.getresource "_cloud-netblocks.googleusercontent.com", Resolv::DNS::Resource::IN::TXT
     ress.data.scan(/(?<=include:)_cloud-netblocks+\d.googleusercontent.com/).each do |r|
       subress = dns.getresource r, Resolv::DNS::Resource::IN::TXT
-      puts subress.data
+      subress.data.scan(/(?<=ip[4|6]:)[^\s]+/).each do |sr|
+        puts sr
+      end
     end
   end
 end

@@ -50,9 +50,8 @@ namespace :collect do
 end
 
 task :collect do
-  Rake.application.in_namespace(:collect).tasks.each do |task|
-    puts "Running #{task}"
-    Rake.application["collect:#{task}"].invoke()
+  Rake.application.in_namespace(:collect) do |tasks|
+    puts tasks
   end
 end
 

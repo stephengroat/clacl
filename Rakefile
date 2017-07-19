@@ -51,7 +51,7 @@ end
 
 task :collect do
   Rake.application.in_namespace(:collect) do |tasks|
-    puts tasks
+    puts tasks.tasks
   end
 end
 

@@ -50,7 +50,7 @@ namespace :collect do
 end
 
 task :collect do
-  Rake.application.in_namespace(:collect).tasks do |task|
+  Rake.application.in_namespace(:collect).tasks.each do |task|
     puts task
     Rake.application.invoke(task)
   end

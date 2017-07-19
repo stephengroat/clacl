@@ -1,6 +1,7 @@
 require 'resolv'
 require 'rubocop/rake_task'
 require 'open-uri'
+require 'json'
 
 task default: %w[collect_gcp collect_cloudflare rubocop]
 
@@ -28,6 +29,15 @@ task :collect_cloudflare do
     list.each do |ip|
       puts ip
     end
+  end
+end
+
+task :collect_aws do
+  puts 'Running collect_aws'
+  list = open('https://ip-ranges.amazonaws.com/ip-ranges.json')
+  data_hash = JSON.parse(list)
+  for data_hash['prefixes'].each do |prefix|
+    puts prefix['ip_prefix']
   end
 end
 

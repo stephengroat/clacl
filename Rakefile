@@ -46,6 +46,10 @@ namespace :collect do
   task :salesforce do
     page = Nokogiri::HTML(open('https://help.salesforce.com/articleView?id=000003652&type=1'))
     puts page.xpath('//table')
+    puts page.xpath('//table').each do |node|
+      puts node.txt
+    end
+    puts page.xpath('//table').length
   end
 end
 

@@ -1,4 +1,6 @@
-task default: %w[collect]
+require 'rubocop/rake_task'
+
+task default: %w[collect rubocop]
 
 task :collect do
   Resolv::DNS.open do |dns|
@@ -11,3 +13,5 @@ task :collect do
     end
   end
 end
+
+RuboCop::RakeTask.new

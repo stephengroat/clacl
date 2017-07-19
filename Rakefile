@@ -2,21 +2,11 @@ require "rubocop/rake_task"
 require "open-uri"
 require "json"
 require "nokogiri"
-Dir.glob('collect/*.rb').each { |r| import r }
+Dir.glob("collect/*.rb").each { |r| import r }
 
 task default: %w[collect rubocop]
 
 namespace :collect do
-  task :cloudflare do
-    %w[4 6].each do |ver|
-      puts "Running IPv#{ver}"
-      list = open("https://www.cloudflare.com/ips-v#{ver}")
-      list.each do |ip|
-        puts ip
-      end
-    end
-  end
-
   task :aws, %i[region service] do |_t, args|
     args.with_defaults(region: ".*", service: ".*")
 

@@ -5,7 +5,7 @@ require 'json'
 
 task default: %w[collect:gcp collect:cloudflare collect:aws rubocop]
 
-namespace :collect do 
+namespace :collect do
   task :gcp do
     puts 'Running gcp'
     Resolv::DNS.open do |dns|
@@ -33,14 +33,15 @@ namespace :collect do
     end
   end
 
-  task :aws, [:region, :service] do |t, args|
-    args.with_defaults(:region => '.*', :service => '.*')
-    
+  task :aws, %i[region service] do |_t, args|
+    args.with_defaults(region: '.*', service: '.*')
+
     puts 'Running aws'
     list = open('https://ip-ranges.amazonaws.com/ip-ranges.json')
     data_hash = JSON.parse(list.read)
     data_hash['prefixes'].each do |prefix|
-      puts prefix['ip_prefix'] if prefix['region'] =~ /#{:region}/ and prefix['service'] =~ /#{:service}/
+      puts prefix['ip_prefix'] if prefix['region'] =~ /#{:region}/ && \
+        prefix['service'] =~ /#{:service}/
     end
   end
 end

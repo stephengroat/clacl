@@ -53,7 +53,7 @@ task :collect do
   Rake.application.in_namespace('collect') do |namespace|
     namespace.tasks.each do |task|
       puts task
-      Rake.application.invoke(task)
+      Rake.application.invoke_task(task)
     end
   end
 end

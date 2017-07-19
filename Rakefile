@@ -1,3 +1,4 @@
+require 'resolv'
 require 'rubocop/rake_task'
 
 task default: %w[collect rubocop]

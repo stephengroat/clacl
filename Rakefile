@@ -44,7 +44,7 @@ namespace :collect do
   end
 
   task :salesforce do
-    page = Nokogiri::HTML(open('https://help.salesforce.com/articleView?id=000003652&type=1'))   
+    page = Nokogiri::HTML(open('https://help.salesforce.com/articleView?id=000003652&type=1'))
     puts page.class
   end
 end
@@ -52,7 +52,7 @@ end
 task :collect do
   Rake.application.in_namespace('collect') do |namespace|
     namespace.tasks.each do |task|
-      puts task
+      puts "Running #{task}"
       Rake.application.invoke_task(task)
     end
   end

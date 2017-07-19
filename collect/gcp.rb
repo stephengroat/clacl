@@ -1,4 +1,4 @@
-require "resolve"
+require "resolv"
 
 namespace :collect do
   task :gcp do

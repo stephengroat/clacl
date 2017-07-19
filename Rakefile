@@ -5,8 +5,10 @@ task default: %w[collect rubocop]
 
 task :collect do
   Resolv::DNS.open do |dns|
-    ress = dns.getresource "_cloud-netblocks.googleusercontent.com", Resolv::DNS::Resource::IN::TXT
-    ress.data.scan(/(?<=include:)_cloud-netblocks+\d.googleusercontent.com/).each do |r|
+    gcp = '_cloud-netblocks.googleusercontent.com'
+    ress = dns.getresource gcp, Resolv::DNS::Resource::IN::TXT
+    gcp_regex = /(?<=include:)_cloud-netblocks+\d.googleusercontent.com/
+    ress.data.scan(gcp_regex).each do |r|
       subress = dns.getresource r, Resolv::DNS::Resource::IN::TXT
       subress.data.scan(/(?<=ip[4|6]:)[^\s]+/).each do |sr|
         puts sr

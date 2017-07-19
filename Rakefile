@@ -23,6 +23,7 @@ end
 task :collect_cloudflare do
   puts 'Running collect_cloudflare'
   %w[4 6].each do |ver|
+    puts "Running IPv#{ver}"
     list = open("https://www.cloudflare.com/ips-v#{ver}")
     list.each do |ip|
       puts ip

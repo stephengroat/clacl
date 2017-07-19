@@ -52,7 +52,7 @@ end
 task :collect do
   Rake.application.in_namespace(:collect) do |tasks|
     puts tasks.tasks
-    puts type(tasks.tasks)
+    puts tasks.tasks.class
   end
 end
 

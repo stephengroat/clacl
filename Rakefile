@@ -3,7 +3,7 @@ require 'rubocop/rake_task'
 require 'open-uri'
 require 'json'
 
-task default: %w[collect_gcp collect_cloudflare rubocop]
+task default: %w[collect_gcp collect_cloudflare collect_aws rubocop]
 
 task :collect_gcp do
   puts 'Running collect_gcp'

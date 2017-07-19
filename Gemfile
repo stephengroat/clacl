@@ -1,7 +1,7 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-gem 'bundler'
-gem 'nokogiri'
-gem 'rake'
-gem 'rubocop'
-gem 'rubocop-github'
+gem "bundler"
+gem "nokogiri"
+gem "rake"
+gem "rubocop"
+gem "rubocop-github"

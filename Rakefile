@@ -40,8 +40,8 @@ namespace :collect do
     list = open('https://ip-ranges.amazonaws.com/ip-ranges.json')
     data_hash = JSON.parse(list.read)
     data_hash['prefixes'].each do |prefix|
-      puts prefix['ip_prefix'] if prefix['region'] =~ /#{:region}/ && \
-        prefix['service'] =~ /#{:service}/
+      puts prefix['ip_prefix'] if prefix['region'] =~ /#{args[region]}/ && \
+        prefix['service'] =~ /#{args[service]}/
     end
   end
 end

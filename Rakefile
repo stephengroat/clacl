@@ -35,7 +35,7 @@ end
 task :collect_aws do
   puts 'Running collect_aws'
   list = open('https://ip-ranges.amazonaws.com/ip-ranges.json')
-  data_hash = JSON.parse(list)
+  data_hash = JSON.parse(list.read)
   data_hash['prefixes'].each do |prefix|
     puts prefix['ip_prefix']
   end

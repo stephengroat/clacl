@@ -45,12 +45,7 @@ namespace :collect do
 
   task :salesforce do
     page = Nokogiri::HTML(open('https://help.salesforce.com/articleView?id=000003652&type=1'))
-    puts page.css('table')
-    puts page.css('table').class
-    page.css('table').children.each do |test|
-      puts test
-      puts test.class
-    end
+    puts page.xpath('//table')
   end
 end
 

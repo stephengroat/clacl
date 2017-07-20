@@ -1,2 +1,4 @@
-# whitelist-travisci
-Whitelist Travis CI IP Addresses
+# whitelist
+Whitelist IP Addresses & Domains
+
+Because blackslists don't work.

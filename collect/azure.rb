@@ -11,7 +11,7 @@ namespace :collect do
       if prefix["Name"] =~ /#{args[:region]}/
         prefix["IpRange"].each do |subnet|
           puts subnet["Subnet"]
-	end
+        end
       end
     end
   end

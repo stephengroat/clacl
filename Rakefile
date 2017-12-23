@@ -16,7 +16,7 @@ namespace :collect do
   end
 end
 
-#namespace :collect do 
+#namespace :collect do
 #  task :ibmbluemix do
 #    page = Nokogiri::HTML(open("https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall"))
 #  end
@@ -29,30 +29,30 @@ namespace :collect do
     # get table headers
     tables = []
     headers = []
-    page.xpath('//*/table/thead/tr/th').each do |th|
+    page.xpath("//*/table/thead/tr/th").each do |th|
       headers << th.text
       if th.next_element.nil?
         tables.push(headers)
-	headers = []
+        headers = []
       end
     end
 
     # get table rows
     rows = []
     tables_pos = 0
-    page.xpath('//*/table/tbody/tr').each_with_index do |row, i|
+    page.xpath("//*/table/tbody/tr").each_with_index do |row, i|
       rows[i] = {}
-      row.xpath('td').each_with_index do |td, j|
+      row.xpath("td").each_with_index do |td, j|
         rows[i][tables[tables_pos][j]] = td.text
       end
       if row.next_element.nil?
         tables[tables_pos].push(rows.reject(&:nil?))
-	tables_pos += 1
-	rows = []
+        tables_pos += 1
+        rows = []
       end
     end
     tables[1][3].each do |element|
-      p element["IP Address or Range"].strip.gsub(/\s+/, ',')
+      p element["IP Address or Range"].strip.gsub(/\s+/, ",")
     end
   end
 end

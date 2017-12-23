@@ -16,6 +16,48 @@ namespace :collect do
   end
 end
 
+namespace :collect do 
+  task :ibmbluemix do
+    page = Nokogiri::HTML(open("https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall"))
+  end
+end
+
+namespace :collect do
+  task :tableau do
+    page = Nokogiri::HTML(open("https://onlinehelp.tableau.com/current/online/en-us/to_keep_data_fresh.htm"))
+
+    # get table headers
+    tables = []
+    headers = []
+    page.xpath('//*/table/thead/tr/th').each do |th|
+      headers << th.text
+      if th.next_element.nil?
+        tables.push(headers)
+	headers = []
+      end
+    end
+
+    # get table rows
+    rows = []
+    tables_pos = 0
+    page.xpath('//*/table/tbody/tr').each_with_index do |row, i|
+      rows[i] = {}
+      row.xpath('td').each_with_index do |td, j|
+        rows[i][tables[tables_pos][j]] = td.text
+      end
+      if row.next_element.nil?
+        tables[tables_pos].push(rows.reject(&:nil?))
+	tables_pos += 1
+	rows = []
+      end
+    end
+    tables[1][3].each do |element|
+      p element["IP Address or Range"].strip.gsub(/\s+/, ',')
+    end
+  end
+end
+
+
 task :collect do
   Rake.application.in_namespace("collect") do |namespace|
     namespace.tasks.each do |task|

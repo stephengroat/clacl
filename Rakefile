@@ -16,11 +16,11 @@ namespace :collect do
   end
 end
 
-namespace :collect do 
-  task :ibmbluemix do
-    page = Nokogiri::HTML(open("https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall"))
-  end
-end
+#namespace :collect do 
+#  task :ibmbluemix do
+#    page = Nokogiri::HTML(open("https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall"))
+#  end
+#end
 
 namespace :collect do
   task :tableau do

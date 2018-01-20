@@ -3,4 +3,4 @@
 
 Whitelist IP Addresses & Domains
 
-Because blackslists don't work.
+Because blacklists don't work.

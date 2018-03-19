@@ -16,6 +16,18 @@ namespace :collect do
   end
 end
 
+namespace :collect do
+  task :oraclecloud do
+    page = Nokogiri::HTML(open("https://docs.us-phoenix-1.oraclecloud.com/Content/Network/Concepts/overview.htm#oci-public-ips"))
+    puts page.xpath("//table")
+    puts page.xpath("//table").each do |node|
+      puts node.txt
+    end
+    puts page.xpath("//table").length
+  end
+end
+
+
 #namespace :collect do
 #  task :ibmbluemix do
 #    page = Nokogiri::HTML(open("https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall"))
@@ -43,7 +55,7 @@ namespace :collect do
     page.xpath("//*/table/tbody/tr").each_with_index do |row, i|
       rows[i] = {}
       row.xpath("td").each_with_index do |td, j|
-        rows[i][tables[tables_pos][j]] = td.text
+        rows[i][tables[tables_pos][j]] = td.text.to_s
       end
       if row.next_element.nil?
         tables[tables_pos].push(rows.reject(&:nil?))

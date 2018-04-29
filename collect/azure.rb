@@ -18,7 +18,6 @@ namespace :collect do
       driver = Selenium::WebDriver.for(:chrome, options: options)
 
       driver.get("https://www.microsoft.com/en-us/download/confirmation.aspx?id=41653")
-      print Dir.glob("#{dir}/*")
       list = open(Dir.glob("#{dir}/*.xml")[0])
       driver.quit
     }

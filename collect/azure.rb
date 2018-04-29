@@ -6,7 +6,7 @@ namespace :collect do
     list = nil
     args.with_defaults(region: ".*")
 
-    options = Selenium::WebDriver::Chrome::Options.new()
+    options = Selenium::WebDriver::Chrome::Options.new(args: ['no-sandbox', 'disable-gpu'])
 
     Dir.mktmpdir {|dir|
       prefs = {

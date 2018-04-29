@@ -1,4 +1,4 @@
-require "open-uri"
+require 'open-uri'
 
 namespace :collect do
   task :cloudflare do

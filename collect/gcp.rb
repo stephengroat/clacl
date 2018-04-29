@@ -1,9 +1,9 @@
-require "resolv"
+require 'resolv'
 
 namespace :collect do
   task :gcp do
     Resolv::DNS.open do |dns|
-      gcp = "_cloud-netblocks.googleusercontent.com"
+      gcp = '_cloud-netblocks.googleusercontent.com'
       ress = dns.getresource gcp, Resolv::DNS::Resource::IN::TXT
       gcp_regex = /(?<=include:)_cloud-netblocks+\d.googleusercontent.com/
       ress.data.scan(gcp_regex).each do |r|

@@ -1,10 +1,10 @@
 source "https://rubygems.org"
 
 gem "bundler"
+gem "chromedriver-helper"
 gem "nokogiri"
 gem "rake"
 gem "rubocop"
 gem "rubocop-github"
-gem "xml-simple"
 gem "selenium-webdriver"
-gem "chromedriver-helper"
+gem "xml-simple"

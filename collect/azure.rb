@@ -1,4 +1,4 @@
-require 'selenium-webdriver'
+require "selenium-webdriver"
 require "xmlsimple"
 
 namespace :collect do
@@ -6,9 +6,9 @@ namespace :collect do
     list = nil
     args.with_defaults(region: ".*")
 
-    options = Selenium::WebDriver::Chrome::Options.new(args: ['no-sandbox'])
+    options = Selenium::WebDriver::Chrome::Options.new(args: ["no-sandbox"])
 
-    Dir.mktmpdir {|dir|
+    Dir.mktmpdir { |dir|
       prefs = {
         prompt_for_download: false,
         default_directory: "#{dir}"
@@ -17,7 +17,7 @@ namespace :collect do
 
       driver = Selenium::WebDriver.for(:chrome, options: options)
 
-      driver.get('https://www.microsoft.com/en-us/download/confirmation.aspx?id=41653')
+      driver.get("https://www.microsoft.com/en-us/download/confirmation.aspx?id=41653")
       print Dir.glob("#{dir}/*")
       list = open(Dir.glob("#{dir}/*.xml")[0])
       driver.quit

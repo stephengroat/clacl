@@ -1,11 +1,28 @@
-require "open-uri"
+require 'selenium-webdriver'
 require "xmlsimple"
 
 namespace :collect do
   task :azure, %i[region] do |_t, args|
+    list = nil
     args.with_defaults(region: ".*")
 
-    list = open("https://download.microsoft.com/download/0/1/8/018E208D-54F8-44CD-AA26-CD7BC9524A8C/PublicIPs_20180402.xml")
+    options = Selenium::WebDriver::Chrome::Options.new()
+
+    Dir.mktmpdir {|dir|
+      prefs = {
+        prompt_for_download: false,
+        default_directory: "#{dir}"
+      }
+      options.add_preference(:download, prefs)
+
+      driver = Selenium::WebDriver.for(:chrome, options: options)
+
+      driver.get('https://www.microsoft.com/en-us/download/confirmation.aspx?id=41653')
+      print Dir.glob("#{dir}/*")
+      list = open(Dir.glob("#{dir}/*.xml")[0])
+      driver.quit
+    }
+
     data_hash = XmlSimple.xml_in(list)
     data_hash["Region"].each do |prefix|
       if prefix["Name"] =~ /#{args[:region]}/

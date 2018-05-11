@@ -6,9 +6,9 @@ namespace :collect do
     list = nil
     args.with_defaults(region: '.*')
 
-    options = Selenium::WebDriver::Chrome::Options.new(args: ['no-sandbox'])
-
     Dir.mktmpdir do |dir|
+      options = Selenium::WebDriver::Chrome::Options.new(args: ['no-sandbox'])
+      
       prefs = {
         prompt_for_download: false,
         default_directory: dir.to_s
@@ -22,6 +22,7 @@ namespace :collect do
       driver.quit
     end
 
+    # Convert XML to Hash
     data_hash = XmlSimple.xml_in(list)
     data_hash['Region'].each do |prefix|
       next unless prefix['Name'] =~ /#{args[:region]}/

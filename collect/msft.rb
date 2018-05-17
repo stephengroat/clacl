@@ -7,7 +7,7 @@ namespace :collect do
 
     Dir.mktmpdir do |dir|
       options = Selenium::WebDriver::Chrome::Options.new(args: ['no-sandbox'])
-      
+
       prefs = {
         prompt_for_download: false,
         default_directory: dir.to_s

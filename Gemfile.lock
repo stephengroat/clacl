@@ -9,8 +9,10 @@ GEM
     chromedriver-helper (1.2.0)
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
+    coderay (1.1.2)
     ffi (1.9.23)
     io-like (0.3.0)
+    method_source (0.9.0)
     mini_portile2 (2.3.0)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
@@ -18,6 +20,9 @@ GEM
     parser (2.5.1.0)
       ast (~> 2.4.0)
     powerpack (0.1.1)
+    pry (0.11.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
     rainbow (3.0.0)
     rake (12.3.1)
     rubocop (0.56.0)
@@ -42,10 +47,11 @@ DEPENDENCIES
   bundler
   chromedriver-helper
   nokogiri
+  pry
   rake
   rubocop
   selenium-webdriver
   xml-simple
 
 BUNDLED WITH
-   1.16.1.pre1
+   1.16.2

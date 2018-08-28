@@ -7,3 +7,7 @@ gem 'rake'
 gem 'rubocop'
 gem 'selenium-webdriver'
 gem 'xml-simple'
+
+group :test, :development do
+  gem 'pry'
+end

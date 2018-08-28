@@ -10,7 +10,7 @@ namespace :collect do
     elsif ENV['TRAVIS'].nil?
       list = open('https://api.github.com/meta')
     else
-      return
+      next
     end
     data_hash = JSON.parse(list.read)
     %w[hooks git pages importer].each do |type|

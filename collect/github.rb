@@ -7,7 +7,7 @@ namespace :collect do
       list = open('https://api.github.com/meta',
                   http_basic_authentication: [ENV['githubcom'].split(':')[0],
                                               ENV['githubcom'].split(':')[1]])
-    eslif ENV['TRAVIS'].nil?
+    elsif ENV['TRAVIS'].nil?
       list = open('https://api.github.com/meta')
     else
       return

@@ -1,6 +1,7 @@
 require 'rubocop/rake_task'
 require 'open-uri'
 require 'nokogiri'
+require 'pry'
 Dir.glob('collect/*.rb').each { |r| import r }
 
 task default: %w[collect rubocop]

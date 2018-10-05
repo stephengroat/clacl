@@ -4,3 +4,8 @@
 Whitelist IP Addresses & Domains
 
 Because blacklists don't work.
+
+## Setup
+
+Look at `.travis.yml`
+

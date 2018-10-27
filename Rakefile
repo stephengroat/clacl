@@ -1,13 +1,20 @@
 require 'rubocop/rake_task'
 require 'open-uri'
 require 'nokogiri'
+require 'pry'
+require 'selenium-webdriver'
 Dir.glob('collect/*.rb').each { |r| import r }
 
 task default: %w[collect rubocop]
 
 namespace :collect do
   task :salesforce do
-    page = Nokogiri::HTML(open('https://help.salesforce.com/articleView?id=000003652&type=1'))
+    driver = Selenium::WebDriver.for :chrome
+    driver.get 'https://help.salesforce.com/articleView?id=000003652&type=1'
+    page_source = driver.page_source
+    driver.quit
+    page = Nokogiri::HTML(page_source)
+    binding.pry
     puts page.xpath('//table')
     puts page.xpath('//table').each do |node|
       puts node.txt
@@ -19,6 +26,7 @@ end
 namespace :collect do
   task :oraclecloud do
     page = Nokogiri::HTML(open('https://docs.us-phoenix-1.oraclecloud.com/Content/Network/Concepts/overview.htm#oci-public-ips'))
+    binding.pry
     puts page.xpath('//table')
     puts page.xpath('//table').each do |node|
       puts node.txt
@@ -38,6 +46,7 @@ end
 namespace :collect do
   task :tableau do
     page = Nokogiri::HTML(open('https://onlinehelp.tableau.com/current/online/en-us/to_keep_data_fresh.htm'))
+    binding.pry
 
     # get table headers
     tables = []

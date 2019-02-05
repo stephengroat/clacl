@@ -1,4 +1,5 @@
 require 'selenium-webdriver'
+require 'chromedriver-helper'
 require 'xmlsimple'
 
 namespace :collect do
@@ -26,6 +27,7 @@ namespace :collect do
     data_hash = XmlSimple.xml_in(list)
     data_hash['Region'].each do |prefix|
       next unless prefix['Name'] =~ /#{args[:region]}/
+      next unless prefix.key?('IpRange')
       prefix['IpRange'].each do |subnet|
         puts subnet['Subnet']
       end

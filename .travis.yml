@@ -4,5 +4,6 @@ addons:
   apt:
     packages:
       - ca-certificates
+env: SSL_CERT_FILE=/etc/ssl/certs
 cache: bundler
 script: xvfb-run bundle exec rake

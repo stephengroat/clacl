@@ -1,5 +1,8 @@
 language: ruby
 addons:
   chrome: stable
+  apt:
+    packages:
+      - ca-certificates
 cache: bundler
 script: xvfb-run bundle exec rake

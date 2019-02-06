@@ -59,6 +59,7 @@ namespace :collect do
         rows[i][tables[tables_pos][j]] = td.text.to_s
       end
       next unless row.next_element.nil?
+
       tables[tables_pos].push(rows.reject(&:nil?))
       tables_pos += 1
       rows = []

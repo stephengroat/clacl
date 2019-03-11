@@ -18,7 +18,7 @@ end
 
 namespace :collect do
   task :oraclecloud do
-    page = Nokogiri::HTML(open('https://docs.us-phoenix-1.oraclecloud.com/Content/Network/Concepts/overview.htm#oci-public-ips'))
+    page = Nokogiri::HTML(open('https://docs.cloud.oracle.com/iaas/Content/Network/Concepts/overview.htm#oci-public-ips'))
     puts page.xpath('//table')
     puts page.xpath('//table').each do |node|
       puts node.txt

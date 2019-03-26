@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'bundler'
-gem 'chromedriver-helper'
+gem 'webdrivers'
 gem 'nokogiri'
 gem 'rake'
 gem 'rubocop'

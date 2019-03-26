@@ -1,5 +1,4 @@
-require 'selenium-webdriver'
-require 'chromedriver-helper'
+require 'webdrivers'
 require 'xmlsimple'
 
 namespace :collect do

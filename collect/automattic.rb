@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'xmlsimple'
 require 'pry'
 require 'uri'

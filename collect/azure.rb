@@ -21,10 +21,26 @@ namespace :collect do
         default_directory: dir.to_s
       }
       options.add_preference(:savefile, prefs)
+      prefs = {
+        enabled: false
+      }
+      options.add_preference(:safebrowsing, prefs)
+
 
       driver = Selenium::WebDriver.for(:chrome, options: options)
 
       driver.get('https://www.microsoft.com/en-us/download/confirmation.aspx?id=41653')
+
+      while true
+        if Dir.glob("#{dir}/*.xml.part").any?
+            sleep(10)
+        elsif Dir.glob("#{dir}/*.xml").any?
+            break
+        else
+            sleep(10)
+        end
+      end
+
       list = File.open(Dir.glob("#{dir}/*.xml")[0])
       driver.quit
     end

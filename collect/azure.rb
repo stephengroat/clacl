@@ -16,6 +16,7 @@ namespace :collect do
         default_directory: dir.to_s
       }
       options.add_preference(:download, prefs)
+      options.add_preference("savefile.default_directory": dir.to_s)
 
       driver = Selenium::WebDriver.for(:chrome, options: options)
 

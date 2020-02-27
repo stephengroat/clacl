@@ -13,7 +13,8 @@ namespace :collect do
 
       prefs = {
         prompt_for_download: false,
-        default_directory: dir.to_s
+        default_directory: dir.to_s,
+        directory_upgrade: true
       }
       options.add_preference(:download, prefs)
       prefs = {

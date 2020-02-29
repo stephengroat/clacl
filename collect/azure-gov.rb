@@ -4,7 +4,7 @@ require 'webdrivers'
 require 'xmlsimple'
 
 namespace :collect do
-  task :azure, %i[region] do |_t, args|
+  task :azure-gov, %i[region] do |_t, args|
     list = nil
     args.with_defaults(region: '.*')
 

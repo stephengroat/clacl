@@ -19,6 +19,17 @@ namespace :collect do
       driver = Selenium::WebDriver.for(:chrome, options: options)
 
       driver.get('https://www.microsoft.com/en-us/download/confirmation.aspx?id=53602')
+
+      while true
+        if Dir.glob("#{dir}/*.csv.part").any?
+            sleep(10)
+        elsif Dir.glob("#{dir}/*.csv").any?
+            break
+        else
+            sleep(10)
+        end
+      end
+
       list = File.open(Dir.glob("#{dir}/*.csv")[0])
       driver.quit
     end

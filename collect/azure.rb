@@ -33,11 +33,11 @@ namespace :collect do
 
         loop do
           if Dir.glob("#{dir}/*.json.part").any?
-            sleep(1)
+            sleep(10)
           elsif Dir.glob("#{dir}/*.json").any?
             break
           else
-            sleep(1)
+            sleep(10)
           end
         end
 

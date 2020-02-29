@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'webdrivers'
-require 'xmlsimple'
+require 'json'
 
 namespace :collect do
   task :azurechina, %i[region] do |_t, args|
@@ -26,33 +26,28 @@ namespace :collect do
       }
       options.add_preference(:safebrowsing, prefs)
 
-
       driver = Selenium::WebDriver.for(:chrome, options: options)
 
       driver.get('https://www.microsoft.com/en-us/download/confirmation.aspx?id=57062')
 
-      while true
-        if Dir.glob("#{dir}/*.xml.part").any?
-            sleep(10)
-        elsif Dir.glob("#{dir}/*.xml").any?
-            break
+      loop do
+        if Dir.glob("#{dir}/*.json.part").any?
+          sleep(10)
+        elsif Dir.glob("#{dir}/*.json").any?
+          break
         else
-            sleep(10)
+          sleep(10)
         end
       end
 
-      list = File.open(Dir.glob("#{dir}/*.xml")[0])
+      list = File.open(Dir.glob("#{dir}/*.json")[0])
       driver.quit
     end
 
-    # Convert XML to Hash
-    data_hash = XmlSimple.xml_in(list)
-    data_hash['Region'].each do |prefix|
-      next unless prefix['Name'] =~ /#{args[:region]}/
-      next unless prefix.key?('IpRange')
-
-      prefix['IpRange'].each do |subnet|
-        puts subnet['Subnet']
+    data_hash = JSON.parse(list.read)
+    data_hash['values'].each do |value|
+      value['properties']['addressPrefixes'].each do |addressPrefix|
+        puts addressPrefix
       end
     end
   end

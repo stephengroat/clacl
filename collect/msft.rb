@@ -20,13 +20,13 @@ namespace :collect do
 
       driver.get('https://www.microsoft.com/en-us/download/confirmation.aspx?id=53602')
 
-      while true
+      loop do
         if Dir.glob("#{dir}/*.csv.part").any?
-            sleep(10)
+          sleep(10)
         elsif Dir.glob("#{dir}/*.csv").any?
-            break
+          break
         else
-            sleep(10)
+          sleep(10)
         end
       end
 

@@ -43,12 +43,12 @@ namespace :collect do
 
         list = File.open(Dir.glob("#{dir}/*.json")[0])
         driver.quit
-      end
 
-      data_hash = JSON.parse(list.read)
-      data_hash['values'].each do |value|
-        value['properties']['addressPrefixes'].each do |address_prefix|
-          puts address_prefix
+        data_hash = JSON.parse(list.read)
+        data_hash['values'].each do |value|
+          value['properties']['addressPrefixes'].each do |address_prefix|
+            puts address_prefix
+          end
         end
       end
     end

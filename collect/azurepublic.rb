@@ -4,7 +4,7 @@ require 'webdrivers'
 require 'xmlsimple'
 
 namespace :collect do
-  task :azure-china, %i[region] do |_t, args|
+  task :azurepublic, %i[region] do |_t, args|
     list = nil
     args.with_defaults(region: '.*')
 
@@ -29,7 +29,7 @@ namespace :collect do
 
       driver = Selenium::WebDriver.for(:chrome, options: options)
 
-      driver.get('https://www.microsoft.com/en-us/download/confirmation.aspx?id=57062')
+      driver.get('https://www.microsoft.com/en-us/download/confirmation.aspx?id=56519')
 
       while true
         if Dir.glob("#{dir}/*.xml.part").any?

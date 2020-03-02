@@ -5,5 +5,4 @@ addons:
     packages:
       - ca-certificates
 cache: bundler
-dist: xenial
 script: xvfb-run bundle exec rake

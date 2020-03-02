@@ -5,8 +5,6 @@ require 'csv'
 
 namespace :collect do
   task :msft do |_t, _args|
-    list = nil
-
     Dir.mktmpdir do |dir|
       options = Selenium::WebDriver::Chrome::Options.new
 
@@ -22,6 +20,7 @@ namespace :collect do
       loop do
         sleep(10) if Dir.glob("#{dir}/*.csv.part").any?
         break if Dir.glob("#{dir}/*.csv").any?
+        sleep(10)
       end
 
       list = File.open(Dir.glob("#{dir}/*.csv")[0])

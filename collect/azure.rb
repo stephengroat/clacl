@@ -25,6 +25,7 @@ namespace :collect do
         loop do
           sleep(10) if Dir.glob("#{dir}/*.json.part").any?
           break if Dir.glob("#{dir}/*.json").any?
+          sleep(5)
         end
 
         list = File.open(Dir.glob("#{dir}/*.json")[0])

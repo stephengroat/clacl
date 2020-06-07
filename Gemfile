@@ -6,7 +6,6 @@ gem 'bundler'
 gem 'nokogiri'
 gem 'rake'
 gem 'rubocop'
-gem 'selenium-webdriver'
 gem 'webdrivers'
 gem 'xml-simple'
 

@@ -1,5 +1,5 @@
 # whitelist
-[![Build Status](https://travis-ci.org/stephengroat/whitelist.svg?branch=master)](https://travis-ci.org/stephengroat/whitelist)
+[![Build Status](https://travis-ci.com/stephengroat/whitelist.svg?branch=master)](https://travis-ci.com/stephengroat/whitelist)
 
 Whitelist IP Addresses & Domains
 

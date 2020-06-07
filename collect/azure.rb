@@ -1,37 +1,41 @@
 # frozen_string_literal: true
 
 require 'webdrivers'
-require 'xmlsimple'
+require 'json'
+
+MS_DOWNLOAD_URL = 'https://www.microsoft.com/en-us/download/confirmation.aspx?id='
 
 namespace :collect do
   task :azure, %i[region] do |_t, args|
-    list = nil
-    args.with_defaults(region: '.*')
+    [57_062, 57_064, 57_063, 56_519].each do |id|
+      args.with_defaults(region: '.*')
 
-    Dir.mktmpdir do |dir|
-      options = Selenium::WebDriver::Chrome::Options.new(args: ['no-sandbox'])
+      Dir.mktmpdir do |dir|
+        options = Selenium::WebDriver::Chrome::Options.new
 
-      prefs = {
-        prompt_for_download: false,
-        default_directory: dir.to_s
-      }
-      options.add_preference(:download, prefs)
+        options.add_preference(:download,
+                               prompt_for_download: false,
+                               directory_upgrade: true,
+                               default_directory: dir.to_s)
 
-      driver = Selenium::WebDriver.for(:chrome, options: options)
+        driver = Selenium::WebDriver.for(:chrome, options: options)
 
-      driver.get('https://www.microsoft.com/en-us/download/confirmation.aspx?id=41653')
-      list = File.open(Dir.glob("#{dir}/*.xml")[0])
-      driver.quit
-    end
+        driver.get(MS_DOWNLOAD_URL + id.to_s)
 
-    # Convert XML to Hash
-    data_hash = XmlSimple.xml_in(list)
-    data_hash['Region'].each do |prefix|
-      next unless prefix['Name'] =~ /#{args[:region]}/
-      next unless prefix.key?('IpRange')
+        loop do
+          sleep(10) if Dir.glob("#{dir}/*.json.part").any?
+          break if Dir.glob("#{dir}/*.json").any?
+          sleep(5)
+        end
 
-      prefix['IpRange'].each do |subnet|
-        puts subnet['Subnet']
+        list = File.open(Dir.glob("#{dir}/*.json")[0])
+
+        JSON.parse(list.read)['values'].each do |value|
+          value['properties']['addressPrefixes'].each do |address_prefix|
+            puts address_prefix
+          end
+        end
+        driver.quit
       end
     end
   end

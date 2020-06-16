@@ -1,9 +1,7 @@
-# whitelist
-[![Build Status](https://travis-ci.org/stephengroat/whitelist.svg?branch=master)](https://travis-ci.org/stephengroat/whitelist)
+# clacl - Clould ACLs
+[![Build Status](https://travis-ci.org/stephengroat/clacl.svg?branch=master)](https://travis-ci.org/stephengroat/clacl)
 
-Whitelist IP Addresses & Domains
-
-Because blacklists don't work.
+Cloud ACL lists of IP addresses and domains
 
 ## Setup
 
